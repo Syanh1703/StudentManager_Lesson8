@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/studentItem">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewStu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        android:layout_margin="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgViewPhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="4dp"
+                android:padding="8dp"
+                android:src="@drawable/photo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtViewStuName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Tên: Đỗ Sỹ Anh"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/guideLine"
+                app:layout_constraintStart_toEndOf="@+id/imgViewPhoto"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtViewStuAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Địa chỉ:"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@id/guideLine"
+                app:layout_constraintStart_toEndOf="@+id/imgViewPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewStuName" />
+
+            <TextView
+                android:id="@+id/txtViewStuPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Phone:"
+                android:inputType="number"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@id/guideLine"
+                app:layout_constraintStart_toEndOf="@+id/imgViewPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewStuAddress" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <ImageButton
+                android:id="@+id/imgBtnDeleteStu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|right"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideLine" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
