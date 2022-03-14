@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import java.io.Serializable
 
@@ -25,6 +26,7 @@ class ItemAdapters(val context: Context, val items: ArrayList<DataModels>) :
         val phone: TextView = view.findViewById(R.id.txtViewStuPhone)
         val deleteBtn: ImageView = view.findViewById(R.id.imgBtnDeleteStu)
         val stuItem :LinearLayout = view.findViewById(R.id.studentItem)
+        val editBtn :ImageButton = view.findViewById(R.id.imgBtnEditStu)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -56,6 +58,9 @@ class ItemAdapters(val context: Context, val items: ArrayList<DataModels>) :
             {
                 holder.deleteBtn.setOnClickListener {
                     context.deleteDialog(item)
+                }
+                holder.editBtn.setOnClickListener {
+                    context.updateDialog(item)
                 }
             }
         }

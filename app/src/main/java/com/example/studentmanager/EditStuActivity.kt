@@ -61,16 +61,8 @@ class EditStuActivity : AppCompatActivity() {
         intent.putExtra(MainActivity.EDIT_STU_ADDR,addr)
         intent.putExtra(MainActivity.EDIT_STU_PHONE,phone)
         setResult(MainActivity.EDIT_CODE, intent)
-        super.onBackPressed()
+        finish()
 
         Toast.makeText(this, "Put Success", Toast.LENGTH_SHORT).show()
-    }
-
-    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == MainActivity.EDIT_CODE) {
-            // There are no request codes
-            val data: Intent? = result.data
-        }
-
     }
 }

@@ -84,9 +84,23 @@
                 android:layout_gravity="bottom|right"
                 android:background="@color/white"
                 android:src="@drawable/ic_baseline_delete_24"
+                android:layout_margin="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideLine" />
+
+            <ImageButton
+                android:id="@+id/imgBtnEditStu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|right"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_edit"
+                app:layout_constraintBottom_toTopOf="@+id/imgBtnDeleteStu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideLine"
+                android:layout_margin="5dp"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

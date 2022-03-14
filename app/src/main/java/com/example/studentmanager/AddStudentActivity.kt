@@ -30,7 +30,7 @@ class AddStudentActivity : AppCompatActivity() {
         }
     }
 
-    fun addStudent()
+    private fun addStudent()
     {
         val name :String = etAddName.text.toString()
         val address :String = etAddAddress.text.toString()
@@ -40,9 +40,9 @@ class AddStudentActivity : AppCompatActivity() {
         {
             Toast.makeText(this, "All of them must be filled", Toast.LENGTH_SHORT).show()
         }
-        else if(phone.length <= 10)
+        else if(phone.length != 11)
         {
-            Toast.makeText(this, "Wrong phone number", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Phone number contains 11 digits", Toast.LENGTH_SHORT).show()
         }
         else
         {
@@ -51,7 +51,6 @@ class AddStudentActivity : AppCompatActivity() {
             intent.putExtra(MainActivity.ADD_STU_ADDR, address)
             intent.putExtra(MainActivity.ADD_STU_PHONE, phone)
             setResult(MainActivity.ADD_CODE, intent)
-            super.onBackPressed()
         }
     }
 

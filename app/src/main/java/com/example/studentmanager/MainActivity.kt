@@ -10,13 +10,13 @@ import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_delete.*
+import kotlinx.android.synthetic.main.dialog_update_layout.*
 import kotlinx.android.synthetic.main.student_item.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var itemList: ArrayList<DataModels>
     private lateinit var itemAdapters: ItemAdapters
-    private lateinit var databaseHandler: DatabaseHandler
-    private lateinit var dataModels: DataModels
+
     companion object {
         const val KEY_EDIT = "Edit Student"
         const val LIST_STU = "Student List"
@@ -30,8 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         const val ADD_CODE = 17
         const val EDIT_CODE = 18
-        const val ITEM_STUDENT = "student"
-
         const val DELETE_CONTENT = "Are you sure want to delete "
     }
 
@@ -67,13 +65,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getDataFromEdit(data :DataModels)
+    {
+        val name = intent.getStringExtra(EDIT_STU_NAME).toString()
+        val addr = intent.getStringExtra(EDIT_STU_ADDR).toString()
+        val phone = intent.getStringExtra(EDIT_STU_PHONE).toString()
+        val databaseHandler = DatabaseHandler(this)
+        if(name.isNotEmpty() && addr.isNotEmpty() && phone.isNotEmpty())
+        {
+            val status = databaseHandler.updateData(DataModels(data.id, name, addr, phone))
+            if(status>-1)
+            {
+                Toast.makeText(this, "Edit Success", Toast.LENGTH_SHORT).show()
+            }
+        }
+        setUpFolderView()
+    }
+
     private fun getItemList(): ArrayList<DataModels> {
         //Create instance for database handler
         val databaseHandler = DatabaseHandler(this)
 
         //Call the viewData to read the folders
         val folderList: ArrayList<DataModels> = databaseHandler.viewFolder()
-        folderList.add((DataModels(1, "Hello", "123 Street", "0938913133")))
+        folderList.add((DataModels(0, "Hello", "123 Street", "0938913133")))
         return folderList
     }
 
@@ -122,11 +137,48 @@ class MainActivity : AppCompatActivity() {
         deleteDialog.show()
     }
 
-    private fun updateList()
+    fun updateDialog(data: DataModels)
     {
-        itemList.clear()
-        itemList.addAll(databaseHandler.viewFolder())
-        itemAdapters.notifyDataSetChanged()
+        val updateDialog = Dialog(this, R.style.Theme_Dialog)
+        updateDialog.setCancelable(false)
+        updateDialog.setContentView(R.layout.dialog_update_layout)
+
+        updateDialog.etUpdateName.setText(data.name)
+        updateDialog.etUpdateAddr.setText(data.address)
+        updateDialog.etUpdatePhone.setText(data.phone)
+
+        updateDialog.tvUpdate.setOnClickListener {
+            val name :String = updateDialog.etUpdateName.text.toString()
+            val addr :String = updateDialog.etUpdateAddr.text.toString()
+            val phone :String = updateDialog.etUpdatePhone.text.toString()
+            val databaseHandler = DatabaseHandler(this)
+            if(name.isNotEmpty() && addr.isNotEmpty() && phone.isNotEmpty() && phone.length!= 11)
+            {
+                val status = databaseHandler.updateData(DataModels(data.id, name,addr,phone))
+                if(status>-1)
+                {
+                    Toast.makeText(this, "Student Updated", Toast.LENGTH_SHORT).show()
+                    setUpFolderView()
+                    updateDialog.dismiss()
+                }
+            }
+        }
+        updateDialog.tvCancel.setOnClickListener {
+            updateDialog.dismiss()
+        }
+        updateDialog.show()
     }
 
+  /*  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == EDIT_CODE && resultCode == RESULT_OK)
+        {
+            val name = intent.getStringExtra(EDIT_STU_NAME).toString()
+            val addr = intent.getStringExtra(EDIT_STU_ADDR).toString()
+            val phone = intent.getStringExtra(EDIT_STU_PHONE).toString()
+            databaseHandler.updateData(dataModels = DataModels(dataReceived.id,name,addr,phone))
+            setUpFolderView()
+            Toast.makeText(this, "Update succeed", Toast.LENGTH_SHORT).show()
+        }
+    }*/
 }
