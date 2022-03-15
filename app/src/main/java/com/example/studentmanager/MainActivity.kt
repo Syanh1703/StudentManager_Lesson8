@@ -65,22 +65,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDataFromEdit(data :DataModels)
-    {
-        val name = intent.getStringExtra(EDIT_STU_NAME).toString()
-        val addr = intent.getStringExtra(EDIT_STU_ADDR).toString()
-        val phone = intent.getStringExtra(EDIT_STU_PHONE).toString()
-        val databaseHandler = DatabaseHandler(this)
-        if(name.isNotEmpty() && addr.isNotEmpty() && phone.isNotEmpty())
-        {
-            val status = databaseHandler.updateData(DataModels(data.id, name, addr, phone))
-            if(status>-1)
-            {
-                Toast.makeText(this, "Edit Success", Toast.LENGTH_SHORT).show()
-            }
-        }
-        setUpFolderView()
-    }
 
     private fun getItemList(): ArrayList<DataModels> {
         //Create instance for database handler
